@@ -1,0 +1,26 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aidenmayoros/Discord-bot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/aidenmayoros/Discord-bot/issues"
+  },
+  "homepage": "https://github.com/aidenmayoros/Discord-bot#readme",
+  "description": ""
+}
