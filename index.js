@@ -14,30 +14,17 @@ const commandFiles = fs
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
 
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs
-	.readdirSync(eventsPath)
-	.filter((file) => file.endsWith('.js'));
-
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
+client.once('ready', () => {
+	console.log('Ready!');
+});
 
 client.on('interactionCreate', async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const command = interaction.client.commands.get(interaction.commandName);
+	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
 
@@ -53,3 +40,18 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(token);
+
+// const eventsPath = path.join(__dirname, 'events');
+// const eventFiles = fs
+// 	.readdirSync(eventsPath)
+// 	.filter((file) => file.endsWith('.js'));
+
+// for (const file of eventFiles) {
+// 	const filePath = path.join(eventsPath, file);
+// 	const event = require(filePath);
+// 	if (event.once) {
+// 		client.once(event.name, (...args) => event.execute(...args));
+// 	} else {
+// 		client.on(event.name, (...args) => event.execute(...args));
+// 	}
+// }
