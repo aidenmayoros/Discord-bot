@@ -15,7 +15,7 @@ module.exports = {
     const weatherLocation = interaction.options.getString('location');
 
     // This means tell Discord that this might possibly take 3+ seconds
-    interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ ephemeral: true });
 
     const GEOCODE_LOCATION_URL = `https://api.myptv.com/geocoding/v1/locations/by-text?searchText=${weatherLocation}&apiKey=N2JiNzA0OWM4MzZiNGVmODgzNWI3ZGEzNGQ5Njk4ZDI6YmFlMTkyODYtOTYwMS00MGNjLWFhODEtNTkzNzVmZGU4MGZl`;
 
@@ -29,7 +29,11 @@ module.exports = {
     const weatherData = await axios.get(WEATHER_URL);
 
     await interaction.editReply({
-      content: `The temperature of ${weatherLocation} is ${weatherData.data.current.temp.toString()}!`,
+      content: `The temperature of ${weatherLocation} is ${parseInt(
+        weatherData.data.current.temp
+      ).toString()}°F and it feels like it's ${parseInt(
+        weatherData.data.current.feels_like
+      ).toString()}°F`,
       ephemeral: true
     });
   }
